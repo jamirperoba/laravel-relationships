@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\Location;
-
 use Illuminate\Http\Request;
 
 class OneToOneController extends Controller
@@ -27,11 +26,23 @@ class OneToOneController extends Controller
 		->where('longitude',$longitude)
 		->get()
 		->first();
-		
 		$country = $location->country;
 		echo $country->name;
 		// echo $location->id;
+	}
+	public function oneToOneInsert(){
 
-
+		$dataForm = ['name' => 'Alemanha' ,
+					'latitude' => 890 ,
+					'longitude' => 998 
+					];
+		$country = Country::create($dataForm);
+		$dataForm = ['country_id' => $country->id];
+		$location = Location::create($dataForm);
+		// $location = new Location;
+		// $location->latitude = $dataForm['latitude'];
+		// $location->latitude = $dataForm['latitude'];
+		// $location->country_id = $country->id;
+		// $saveLocation = $location->save();
 	}
 }
