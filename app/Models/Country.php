@@ -12,4 +12,7 @@ class Country extends Model
     	return $this->hasOne(Location::class);
     	// return $this->hasOne(Location::class, 'country_id','id');
     }
+    public function states(){
+    	return $this->hasMany(State::class);
+    }
 }
