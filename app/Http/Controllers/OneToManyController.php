@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Country;
 use App\Models\State;
 
 class OneToManyController extends Controller
 {
 	public function oneToMany(){
+
     	// $country = Country::where('name','Brasil')->get()->first();
 		$KeySearch = 'a';
 		// $countries = Country::where('name','LIKE',"%{$KeySearch}%")->get();
@@ -49,8 +51,28 @@ class OneToManyController extends Controller
 				foreach ($state->cities as $city) {
 					echo " {$city->name},";
 				}
+				echo "<hr>";
 			}
-			echo "<hr>";
 		}
+	}
+	public function oneToManyInsert(){
+		$dataForm = [
+			'name' =>'Bahia',
+			'initials' =>'BA', 
+		];
+		$country = Country::find(1);
+		$insertState = $country->states()->create($dataForm);
+		var_dump($insertState->name);
+
+	}
+	public function oneToManyInsertTwo(){
+		$dataForm = [
+			'name' =>'Bahia',
+			'initials' =>'BA',
+			'country_id'=>'1', 
+		];
+		$insertState = State::create($dataForm);
+		var_dump($insertState->name);
+
 	}
 }
